@@ -21,10 +21,10 @@
 			"revisionTime": "2017-05-30T19:55:47Z"
 		},
 		{
-			"checksumSHA1": "Mc3RzDWA21A4TpnWhj/k2llscrE=",
+			"checksumSHA1": "/ea7nSj9zk3yU/FYiX6Xw9FWLSU=",
 			"path": "github.com/qnib/go-httpcheck/lib",
-			"revision": "3e77b07e18821d748681ce96f0e00cf2af0ab5ce",
-			"revisionTime": "2017-06-06T09:04:00Z"
+			"revision": "502fdb11b5605804f27ab896270135e2c34bc03b",
+			"revisionTime": "2017-06-06T09:29:51Z"
 		}
 	],
 	"rootPath": "github.com/qnib/go-httpcheck"

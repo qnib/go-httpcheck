@@ -41,7 +41,9 @@ func ShowHealth(w http.ResponseWriter, r *http.Request) {
 	dim.Add("client_port", sAdd[1])
 	health := NewHealth("http", 200)
 	json.NewEncoder(w).Encode(health)
-	LogRequest(r, "/health", now, dim)
+	if sAdd[0] != "127.0.0.1" {
+		LogRequest(r, "/health", now, dim)
+	}
 }
 
 func LogRequest(r *http.Request,ep string, start time.Time, dim Dimensions) {
