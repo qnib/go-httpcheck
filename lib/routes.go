@@ -26,34 +26,49 @@ func NewHealth(n string, s int) Health {
 func Index(w http.ResponseWriter, r *http.Request) {
 	now := time.Now()
 	sAdd := strings.Split(r.RemoteAddr, ":")
+	dim := NewDimension()
+	dim.Add("client_id", sAdd[0])
+	dim.Add("client_port", sAdd[1])
 	fmt.Fprint(w, fmt.Sprintf("Welcome: %s\n", sAdd[0]))
-	LogRequest(r, "/", now)
+	LogRequest(r, "/", now, dim)
 }
 
 func ShowHealth(w http.ResponseWriter, r *http.Request) {
 	now := time.Now()
+	sAdd := strings.Split(r.RemoteAddr, ":")
+	dim := NewDimension()
+	dim.Add("client_id", sAdd[0])
+	dim.Add("client_port", sAdd[1])
 	health := NewHealth("http", 200)
 	json.NewEncoder(w).Encode(health)
-	LogRequest(r, "/health", now)
+	LogRequest(r, "/health", now, dim)
 }
 
-func LogRequest(r *http.Request,ep string, start time.Time) {
+func LogRequest(r *http.Request,ep string, start time.Time, dim Dimensions) {
 	now := time.Now()
 	dur := now.Sub(start).Nanoseconds()/1000000
-	sAdd := strings.Split(r.RemoteAddr, ":")
-	msg := fmt.Sprintf("request:+1|c client_ip=%s,endpoint=%s\n", sAdd[0], ep)
+	msg := fmt.Sprintf("request:+1|c %s\n", dim.String())
 	fmt.Printf(msg)
-	msg = fmt.Sprintf("duration:%d|ms client_ip=%s,endpoint=%s\n", dur, sAdd[0], ep)
+	msg = fmt.Sprintf("duration:%d|ms %s\n", dur, dim.String())
+	fmt.Printf(msg)
+	msg = fmt.Sprintf("duration:%d|ms %s\n", dur, dim.String())
 	fmt.Printf(msg)
 }
 
 
 func ComputePi(w http.ResponseWriter, r *http.Request) {
 	now := time.Now()
+	sAdd := strings.Split(r.RemoteAddr, ":")
+	dim := NewDimension()
+	dim.Add("client_id", sAdd[0])
+	dim.Add("client_port", sAdd[1])
 	num := strings.TrimPrefix(r.URL.Path, "/pi/")
+	if num == "/pi" || num == "" {
+		num = "9999"
+	}
+	dim.Add("pi_num", num)
 	n, _ := strconv.Atoi(num)
 	res := pi(n)
-	//sAdd := strings.Split(r.RemoteAddr, ":")
-	fmt.Fprint(w, fmt.Sprintf("Welcome: pi(%s)=%.f\n", num, res))
-	LogRequest(r, "/pi", now)
+	fmt.Fprint(w, fmt.Sprintf("Welcome: pi(%s)=%f\n", num, res))
+	LogRequest(r, "/pi", now, dim)
 }
