@@ -15,7 +15,7 @@ func main() {
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:  "host",
-			Value: "1.0.0.0",
+			Value: "0.0.0.0",
 			Usage: "Bind host for the webserver.",
 			EnvVar: "LISTEN_HOST",
 		},
