@@ -3,10 +3,28 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "pPH/BoINXxzYDObljpsGZbysMrw=",
+			"path": "github.com/BurntSushi/toml",
+			"revision": "b26d9c308763d68093482582cea63d69be07a0f0",
+			"revisionTime": "2017-03-28T06:15:53Z"
+		},
+		{
 			"checksumSHA1": "0f16D95P6TXnvOxFh8b2z2CPzmE=",
 			"path": "github.com/codegangsta/cli",
 			"revision": "d70f47eeca3afd795160003bc6e28b001d60c67c",
 			"revisionTime": "2017-05-06T04:25:29Z"
+		},
+		{
+			"checksumSHA1": "ImX1uv6O09ggFeBPUJJ2nu7MPSA=",
+			"path": "github.com/ghodss/yaml",
+			"revision": "0ca9ea5df5451ffdf184b4428c902747c2c11cd7",
+			"revisionTime": "2017-03-27T23:54:44Z"
+		},
+		{
+			"checksumSHA1": "KIui02MZXkQsIP+Oir4Iv/tq/SU=",
+			"path": "github.com/go-ini/ini",
+			"revision": "d3de07a94d22b4a0972deb4b96d790c2c0ce8333",
+			"revisionTime": "2017-06-02T20:46:24Z"
 		},
 		{
 			"checksumSHA1": "g/V4qrXjUGG9B+e3hB+4NAYJ5Gs=",
@@ -21,10 +39,22 @@
 			"revisionTime": "2017-05-30T19:55:47Z"
 		},
 		{
-			"checksumSHA1": "/ea7nSj9zk3yU/FYiX6Xw9FWLSU=",
+			"checksumSHA1": "HuCKQG4tJ0ShnULHcaik25aCQqc=",
 			"path": "github.com/qnib/go-httpcheck/lib",
-			"revision": "502fdb11b5605804f27ab896270135e2c34bc03b",
-			"revisionTime": "2017-06-06T09:29:51Z"
+			"revision": "10db64c151915d2cb1a6f1fca6adaa93b099d041",
+			"revisionTime": "2017-06-06T10:24:20Z"
+		},
+		{
+			"checksumSHA1": "m8hYD/alsufIYIM7sR06wbL+dKo=",
+			"path": "github.com/zpatrick/go-config",
+			"revision": "710646a45582fde23bf77bacbc2f38008dc7ffc2",
+			"revisionTime": "2016-11-18T20:29:31Z"
+		},
+		{
+			"checksumSHA1": "fALlQNY1fM99NesfLJ50KguWsio=",
+			"path": "gopkg.in/yaml.v2",
+			"revision": "cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b",
+			"revisionTime": "2017-04-07T17:21:22Z"
 		}
 	],
 	"rootPath": "github.com/qnib/go-httpcheck"

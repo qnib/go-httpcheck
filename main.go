@@ -26,10 +26,16 @@ func main() {
 			EnvVar: "LISTEN_PORT",
 		},
 		cli.StringFlag{
-			Name:  "metrics-target",
-			Value: "tasks.qframe-agent:11001",
+			Name:  "log-mode",
+			Value: "stdout",
 			Usage: "TCP Server to send metrics to",
-			EnvVar: "METRICS_TARGET",
+			EnvVar: "LOG_MODE",
+		},
+		cli.StringFlag{
+			Name:  "log-tcp-target",
+			Value: "tasks.qframe-agent:11001",
+			Usage: "TCP Server to send logs to",
+			EnvVar: "LOG_TCP_TARGET",
 		},
 	}
 	httpd := httpcheck.NewHttpd()
