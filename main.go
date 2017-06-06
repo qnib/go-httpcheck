@@ -25,15 +25,19 @@ func main() {
 			Usage: "Listen port for the webserver.",
 			EnvVar: "LISTEN_PORT",
 		},
-		cli.StringFlag{
-			Name:  "log-mode",
-			Value: "stdout",
-			Usage: "TCP Server to send metrics to",
-			EnvVar: "LOG_MODE",
+		cli.BoolFlag{
+			Name:  "log-stdout-disable",
+			Usage: "Disable logging to stdout",
+			EnvVar: "LOG_STDOUT_DISABLE",
+		},
+		cli.BoolFlag{
+			Name:  "log-tcp",
+			Usage: "Log to TCP server",
+			EnvVar: "LOG_TCP",
 		},
 		cli.StringFlag{
 			Name:  "log-tcp-target",
-			Value: "tasks.qframe-agent:11001",
+			Value: "tasks.qframe-agent.11001",
 			Usage: "TCP Server to send logs to",
 			EnvVar: "LOG_TCP_TARGET",
 		},

@@ -75,7 +75,7 @@ func (h *Httpd) ShowHealth(w http.ResponseWriter, r *http.Request) {
 func (h *Httpd) AssembleLogLines(r *http.Request,ep string, start time.Time, dim Dimensions) (res []string) {
 	now := time.Now()
 	dur := now.Sub(start).Nanoseconds()/1000000
-	res = append(res, fmt.Sprintf("request:+1|c %s", dim.String()))
+	res = append(res, fmt.Sprintf("request:+1|g %s", dim.String()))
 	res = append(res, fmt.Sprintf("duration:%d|ms %s", dur, dim.String()))
 	return res
 }
@@ -83,20 +83,19 @@ func (h *Httpd) AssembleLogLines(r *http.Request,ep string, start time.Time, dim
 func (h *Httpd) LoqRequest(r *http.Request,ep string, start time.Time, dim Dimensions) {
 	now := time.Now()
 	msgs := []string{}
-	dur := now.Sub(start).Nanoseconds()/1000000
-	msgs = append(msgs, fmt.Sprintf("request:+1|c %s", dim.String()))
+	dur := now.Sub(start).Nanoseconds() / 1000000
+	msgs = append(msgs, fmt.Sprintf("request:+1|g %s", dim.String()))
 	msgs = append(msgs, fmt.Sprintf("duration:%d|ms %s", dur, dim.String()))
-	lmod, _ := h.Cfg.String("log-mode")
-	addr, _ := h.Cfg.String("log-tcp-target")
-	switch lmod {
-	case "tcp":
-		log.Printf("Send log to %s", addr)
-		conn, _ := net.Dial("tcp", addr)
-		defer conn.Close()
+	lstdout, _ := h.Cfg.Bool("log-stdout-disabled")
+	ltcp, _ := h.Cfg.Bool("log-tcp")
+	if ltcp {
+		addr, _ := h.Cfg.String("log-tcp-target")
 		for _, msg := range msgs {
-			fmt.Fprintf(conn, msg+ "\n")
+			conn, _ := net.Dial("tcp", addr)
+			conn.Close()
 		}
-	default:
+	}
+	if !lstdout {
 		fmt.Println(strings.Join(msgs, "\n"))
 	}
 }
