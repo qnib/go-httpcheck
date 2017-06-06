@@ -16,7 +16,9 @@ import (
 
 
 type Httpd struct {
-	Cfg *config.Config
+	Cfg 	*config.Config
+	Version string
+	AppName string
 	Metrics map[string]Metric
 }
 
@@ -30,7 +32,8 @@ func (h *Httpd) Run(ctx *cli.Context) {
 	cfg := config.NewConfig([]config.Provider{})
 	cfg.Providers = append(cfg.Providers, config.NewCLI(ctx, false))
 	h.Cfg = cfg
-
+	h.Version = ctx.App.Version
+	h.AppName = ctx.App.Name
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", h.Index)
 	router.HandleFunc("/health", h.ShowHealth)
@@ -51,8 +54,9 @@ func (h *Httpd) Index(w http.ResponseWriter, r *http.Request) {
 	now := time.Now()
 	sAdd := strings.Split(r.RemoteAddr, ":")
 	dim := NewDimension()
-	dim.Add("client_id", sAdd[0])
-	dim.Add("client_port", sAdd[1])
+	dim.Add("version", h.Version)
+	dim.Add("app", h.AppName)
+	dim.Add("endpoint", "/")
 	fmt.Fprint(w, fmt.Sprintf("Welcome: %s\n", sAdd[0]))
 	h.LoqRequest(r, "/", now, dim)
 
@@ -63,8 +67,9 @@ func (h *Httpd) ShowHealth(w http.ResponseWriter, r *http.Request) {
 	now := time.Now()
 	sAdd := strings.Split(r.RemoteAddr, ":")
 	dim := NewDimension()
-	dim.Add("client_id", sAdd[0])
-	dim.Add("client_port", sAdd[1])
+	dim.Add("version", h.Version)
+	dim.Add("app", h.AppName)
+	dim.Add("endpoint", "/health")
 	health := NewHealth("http", 200)
 	json.NewEncoder(w).Encode(health)
 	if sAdd[0] != "127.0.0.1" {
@@ -103,10 +108,10 @@ func (h *Httpd) LoqRequest(r *http.Request,ep string, start time.Time, dim Dimen
 
 func (h *Httpd) ComputePi(w http.ResponseWriter, r *http.Request) {
 	now := time.Now()
-	sAdd := strings.Split(r.RemoteAddr, ":")
 	dim := NewDimension()
-	dim.Add("client_id", sAdd[0])
-	dim.Add("client_port", sAdd[1])
+	dim.Add("version", h.Version)
+	dim.Add("app", h.AppName)
+	dim.Add("endpoint", "/pi")
 	num := strings.TrimPrefix(r.URL.Path, "/pi/")
 	if num == "/pi" || num == "" {
 		num = "9999"

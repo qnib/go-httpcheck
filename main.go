@@ -9,7 +9,8 @@ import (
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "ETC metrics collector based on qframe, inspired by qcollect,logstash and fullerite"
+	app.Description = "ETC metrics collector based on qframe, inspired by qcollect,logstash and fullerite"
+	app.Name = "go-httpcheck"
 	app.Usage = "gcollect-metrics [options]"
 	app.Version = "1.1.3"
 	app.Flags = []cli.Flag{
