@@ -1,0 +1,31 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "0f16D95P6TXnvOxFh8b2z2CPzmE=",
+			"path": "github.com/codegangsta/cli",
+			"revision": "d70f47eeca3afd795160003bc6e28b001d60c67c",
+			"revisionTime": "2017-05-06T04:25:29Z"
+		},
+		{
+			"checksumSHA1": "g/V4qrXjUGG9B+e3hB+4NAYJ5Gs=",
+			"path": "github.com/gorilla/context",
+			"revision": "08b5f424b9271eedf6f9f0ce86cb9396ed337a42",
+			"revisionTime": "2016-08-17T18:46:32Z"
+		},
+		{
+			"checksumSHA1": "6PQFibmHgsXFHoRQPmkw2V+59Lk=",
+			"path": "github.com/gorilla/mux",
+			"revision": "18fca31550181693b3a834a15b74b564b3605876",
+			"revisionTime": "2017-05-30T19:55:47Z"
+		},
+		{
+			"checksumSHA1": "nUm9GRXawDqbh/Z14U3oc9wOUUs=",
+			"path": "github.com/qnib/go-httpcheck/lib",
+			"revision": "21ba9d5ee09760c8ee9d54ba945ac44351734492",
+			"revisionTime": "2017-06-06T07:06:32Z"
+		}
+	],
+	"rootPath": "github.com/qnib/go-httpcheck"
+}
