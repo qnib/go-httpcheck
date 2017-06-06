@@ -11,7 +11,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "ETC metrics collector based on qframe, inspired by qcollect,logstash and fullerite"
 	app.Usage = "gcollect-metrics [options]"
-	app.Version = "1.1.0"
+	app.Version = "1.1.1"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:  "host",
