@@ -12,7 +12,7 @@ func main() {
 	app.Description = "ETC metrics collector based on qframe, inspired by qcollect,logstash and fullerite"
 	app.Name = "go-httpcheck"
 	app.Usage = "gcollect-metrics [options]"
-	app.Version = "1.1.3"
+	app.Version = "1.1.4"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:  "host",
