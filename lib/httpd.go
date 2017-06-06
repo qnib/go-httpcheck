@@ -24,6 +24,8 @@ func (h *Httpd) Run(ctx *cli.Context) {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", Index)
 	router.HandleFunc("/health", ShowHealth)
+	router.HandleFunc("/pi", ComputePi)
+	router.HandleFunc("/pi/{{num}}", ComputePi)
 	port := ctx.Int("port")
 	host := ctx.String("host")
 	addr := fmt.Sprintf("%s:%d", host, port)
