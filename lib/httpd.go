@@ -75,7 +75,7 @@ func (h *Httpd) ShowHealth(w http.ResponseWriter, r *http.Request) {
 func (h *Httpd) AssembleLogLines(r *http.Request,ep string, start time.Time, dim Dimensions) (res []string) {
 	now := time.Now()
 	dur := now.Sub(start).Nanoseconds()/1000000
-	res = append(res, fmt.Sprintf("request:+1|g %s", dim.String()))
+	res = append(res, fmt.Sprintf("request:+1|c %s", dim.String()))
 	res = append(res, fmt.Sprintf("duration:%d|ms %s", dur, dim.String()))
 	return res
 }
@@ -84,7 +84,7 @@ func (h *Httpd) LoqRequest(r *http.Request,ep string, start time.Time, dim Dimen
 	now := time.Now()
 	msgs := []string{}
 	dur := now.Sub(start).Nanoseconds() / 1000000
-	msgs = append(msgs, fmt.Sprintf("request:+1|g %s", dim.String()))
+	msgs = append(msgs, fmt.Sprintf("request:+1|c %s", dim.String()))
 	msgs = append(msgs, fmt.Sprintf("duration:%d|ms %s", dur, dim.String()))
 	lstdout, _ := h.Cfg.Bool("log-stdout-disabled")
 	ltcp, _ := h.Cfg.Bool("log-tcp")
@@ -111,7 +111,6 @@ func (h *Httpd) ComputePi(w http.ResponseWriter, r *http.Request) {
 	if num == "/pi" || num == "" {
 		num = "9999"
 	}
-	dim.Add("pi_num", num)
 	n, _ := strconv.Atoi(num)
 	res := pi(n)
 	fmt.Fprint(w, fmt.Sprintf("Welcome: pi(%s)=%f\n", num, res))
