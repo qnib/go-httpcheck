@@ -92,6 +92,7 @@ func (h *Httpd) LoqRequest(r *http.Request,ep string, start time.Time, dim Dimen
 		addr, _ := h.Cfg.String("log-tcp-target")
 		for _, msg := range msgs {
 			conn, _ := net.Dial("tcp", addr)
+			fmt.Fprintf(conn, msg+"\n")
 			conn.Close()
 		}
 	}
