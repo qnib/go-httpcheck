@@ -12,6 +12,8 @@ import (
 	"encoding/json"
 	"strconv"
 	"time"
+	"github.com/urfave/negroni"
+
 )
 
 
@@ -40,14 +42,21 @@ func (h *Httpd) Run(ctx *cli.Context) {
 	router.HandleFunc("/pi", h.ComputePi)
 	router.HandleFunc("/pi/{{num}}", h.ComputePi)
 	port := ctx.Int("port")
+	debug := ctx.Bool("debug")
 	host := ctx.String("host")
 	addr := fmt.Sprintf("%s:%d", host, port)
 	l, err := net.Listen("tcp4", addr)
 	if err != nil {
 		log.Fatal(err)
 	}
+	n := negroni.New()
+	if debug {
+		log.Println("Enable request debugging")
+		n.Use(negroni.NewLogger())
+	}
+	n.UseHandler(router)
 	log.Printf("Start serving on %s", addr)
-	log.Fatal(http.Serve(l, router))
+	log.Fatal(http.Serve(l, n))
 }
 
 func (h *Httpd) Index(w http.ResponseWriter, r *http.Request) {

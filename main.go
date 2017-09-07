@@ -32,6 +32,11 @@ func main() {
 			EnvVar: "LOG_STDOUT_DISABLE",
 		},
 		cli.BoolFlag{
+			Name:  "debug",
+			Usage: "Enable negroni debbuger of each request",
+			EnvVar: "DEBUG",
+		},
+		cli.BoolFlag{
 			Name:  "log-tcp",
 			Usage: "Log to TCP server",
 			EnvVar: "LOG_TCP",
